@@ -1,1 +1,1 @@
-# diveintogo
+# Dive into Go
