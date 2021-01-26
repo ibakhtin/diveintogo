@@ -7,15 +7,13 @@ import (
 	"strings"
 )
 
-type Value interface{}
-
 type Node struct {
-	head Value
+	head interface{}
 	tail *Node
 }
 
 type List struct {
-	node *Node
+	data *Node
 	len  int
 }
 
@@ -23,22 +21,22 @@ func New() *List {
 	return new(List)
 }
 
-func (l *List) Head() (Value, bool) {
+func (l *List) Head() (interface{}, bool) {
 	if l.len > 0 {
-		return l.node.head, true
+		return l.data.head, true
 	}
 	return nil, false
 }
 
 func (l *List) Tail() (*List, bool) {
 	if l.len > 0 {
-		return &List{l.node.tail, l.len - 1}, true
+		return &List{l.data.tail, l.len - 1}, true
 	}
 	return nil, false
 }
 
-func (l *List) Add(v Value) *List {
-	l.node = &Node{v, l.node}
+func (l *List) Add(v interface{}) *List {
+	l.data = &Node{v, l.data}
 	l.len += 1
 	return l
 }
@@ -49,7 +47,7 @@ func (l *List) Len() int {
 
 func (l *List) String() string {
 	s := "("
-	for node := l.node; node != nil; node = node.tail {
+	for node := l.data; node != nil; node = node.tail {
 		if reflect.TypeOf(node.head).String() == "string" {
 			s += fmt.Sprintf("%q", node.head) + " "
 		} else {
