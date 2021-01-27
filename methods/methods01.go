@@ -19,10 +19,11 @@ func (p *Point) Scale(n float64) {
 }
 
 func main() {
-	// 1.
 	pv := Point{1, 1}
 	qv := Point{3, 4}
 	pp := &pv
+
+	// 1.
 	// parameter is T and argument is T
 	fmt.Println(pv.Distance(qv))
 	// parameter is *T and argument is *T
